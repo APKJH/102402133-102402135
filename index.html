@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>校园寻物招领 · 原型</title>
+  <style>
+    :root{--ink:#172033;--muted:#6f7890;--line:#e7e9ef;--bg:#f6f8fb;--panel:#fff;--brand:#3457f1;--brand2:#eef2ff;--warm:#f9a826;--green:#159570;--danger:#dd5a5a;--shadow:0 16px 44px rgba(25,39,76,.10)}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#f8f9ff,#f2f7f7);color:var(--ink);font:14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+    button,input,textarea,select{font:inherit} button{cursor:pointer;border:0} a{color:inherit;text-decoration:none}
+    .shell{display:grid;grid-template-columns:232px 1fr;min-height:100vh}.side{background:#111a35;color:#e7ebff;padding:26px 16px;display:flex;flex-direction:column;gap:26px}.brand{display:flex;align-items:center;gap:10px;padding:2px 10px}.brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#7792ff,#3457f1);font-weight:800}.brand strong{font-size:16px}.brand small{display:block;color:#aab5de;font-size:11px}.nav{display:grid;gap:7px}.nav button{width:100%;text-align:left;border-radius:10px;background:transparent;color:#aeb7d6;padding:11px 13px;transition:.2s}.nav button:hover,.nav button.active{background:#24325f;color:#fff}.nav .emoji{width:23px;display:inline-block}.side-note{margin-top:auto;padding:13px;border:1px solid #2d3b6c;border-radius:14px;color:#bcc6e2;font-size:12px}.side-note b{color:#fff;display:block;margin-bottom:4px}.main{padding:26px 32px 38px;max-width:1320px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.crumb{color:var(--muted);font-size:13px}.user{display:flex;gap:10px;align-items:center}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#dfe7ff;color:#3457f1;font-weight:700}.view{display:none}.view.active{display:block}.hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px}.hero h1{font-size:29px;letter-spacing:-.6px;margin:0 0 5px}.hero p{color:var(--muted);margin:0}.primary{padding:10px 15px;border-radius:10px;background:var(--brand);color:#fff;font-weight:700;box-shadow:0 6px 14px rgba(52,87,241,.23)}.secondary{padding:10px 14px;border-radius:10px;background:var(--brand2);color:var(--brand);font-weight:700}.ghost{padding:8px 10px;border-radius:9px;background:transparent;color:var(--muted)}.ghost:hover{background:#f2f4fb;color:var(--ink)}
+    .searchbar{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:10px;display:flex;gap:9px;margin-bottom:22px}.searchbar input{flex:1;border:0;outline:0;padding:7px 9px;color:var(--ink);background:transparent}.filter{border:1px solid var(--line);border-radius:9px;padding:0 10px;color:var(--muted);background:#fff}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(35,49,86,.06)}.stat{padding:17px 18px}.stat .label{color:var(--muted);font-size:12px}.stat .num{font-size:25px;font-weight:800;margin:5px 0}.stat .hint{font-size:12px;color:var(--green)}.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px}.section-head h2{font-size:17px;margin:0}.section-head span{color:var(--muted);font-size:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.item{overflow:hidden;padding:0;transition:.2s}.item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.item-photo{height:142px;background:linear-gradient(135deg,#dce6ff,#f7e6cd);display:grid;place-items:center;font-size:53px}.item-body{padding:14px}.item-title{font-weight:800;margin-bottom:5px}.meta{color:var(--muted);font-size:12px}.tag{display:inline-flex;align-items:center;padding:3px 8px;border-radius:30px;background:#eef8f5;color:var(--green);font-size:11px;margin-top:10px}.tag.warm{background:#fff5df;color:#a96a00}.tag.blue{background:#eef2ff;color:var(--brand)}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.empty{padding:50px 20px;text-align:center;color:var(--muted)}.empty .big{font-size:42px;margin-bottom:7px}
+    .form-card{max-width:860px;padding:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-weight:700;font-size:13px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;outline:none;background:#fff;color:var(--ink)}.field textarea{min-height:104px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:#7890ff;box-shadow:0 0 0 3px #eef2ff}.upload{border:1px dashed #aeb9dd;border-radius:12px;display:grid;place-items:center;min-height:95px;color:var(--muted);background:#fafbff}.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;border-top:1px solid var(--line);padding-top:17px}.notice{padding:11px 13px;border-radius:10px;background:#f4f7ff;color:#56658e;font-size:12px;margin-bottom:15px}.detail{display:grid;grid-template-columns:1.1fr 1fr;gap:19px}.detail-photo{min-height:380px;border-radius:16px;background:linear-gradient(135deg,#dbe5ff,#ffeed1);display:grid;place-items:center;font-size:110px}.detail-card{padding:22px}.detail-card h2{font-size:25px;margin:0 0 7px}.detail-card dl{display:grid;grid-template-columns:80px 1fr;gap:10px 14px;margin:22px 0}.detail-card dt{color:var(--muted)}.detail-card dd{margin:0}.contact{margin-top:20px;padding-top:17px;border-top:1px solid var(--line)}.contact .name{font-weight:800}.contact .small{font-size:12px;color:var(--muted)}.toast{position:fixed;right:25px;bottom:25px;background:#172033;color:white;padding:12px 15px;border-radius:10px;box-shadow:var(--shadow);display:none}.toast.show{display:block;animation:fade 2.8s both}@keyframes fade{0%,100%{opacity:0;transform:translateY(7px)}12%,82%{opacity:1;transform:none}}
+    .flow-note{margin-top:22px;padding:17px 19px;background:linear-gradient(135deg,#111a35,#26386f);color:#e8edff;border-radius:16px}.flow-note b{color:#fff}.flow-note code{color:#bcd0ff;background:#233362;padding:2px 5px;border-radius:4px}
+    @media(max-width:900px){.shell{grid-template-columns:1fr}.side{padding:13px 15px;position:sticky;top:0;z-index:2}.nav{grid-template-columns:repeat(5,1fr);gap:5px}.nav button{font-size:0;text-align:center;padding:9px}.nav .emoji{font-size:17px;width:auto}.side-note{display:none}.main{padding:20px 15px}.grid{grid-template-columns:repeat(2,1fr)}.detail{grid-template-columns:1fr}.detail-photo{min-height:240px}.top{margin-bottom:18px}}
+    @media(max-width:580px){.hero{align-items:flex-start;gap:12px;flex-direction:column}.stats{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.searchbar{flex-wrap:wrap}.searchbar input{min-width:100%}.filter{height:36px}.detail-card{padding:17px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand"><div class="brand-mark">寻</div><div><strong>校园寻物招领</strong><small>让物品回到主人身边</small></div></div>
+      <nav class="nav" aria-label="主导航">
+        <button class="active" data-view="home"><span class="emoji">⌂</span>首页</button>
+        <button data-view="publish"><span class="emoji">＋</span>发布信息</button>
+        <button data-view="search"><span class="emoji">⌕</span>搜索物品</button>
+        <button data-view="mine"><span class="emoji">▣</span>我的发布</button>
+        <button data-view="help"><span class="emoji">?</span>使用帮助</button>
+      </nav>
+      <div class="side-note"><b>本原型演示范围</b>浏览、发布、搜索、查看详情、修改信息状态。数据为演示数据，不涉及真实认证与即时聊天。</div>
+    </aside>
+    <main class="main">
+      <div class="top"><div class="crumb">校园服务 / <span id="crumbText">首页</span></div><div class="user"><span>谭段昊</span><div class="avatar">谭</div></div></div>
+
+      <section id="home" class="view active">
+        <div class="hero"><div><h1>把遗失的物品找回来</h1><p>集中发布和查找校园内的失物、招领信息。</p></div><button class="primary" data-view="publish">＋ 发布信息</button></div>
+        <div class="searchbar"><input id="homeSearch" placeholder="输入物品名称、地点或关键词，例如：校园卡、图书馆" /><select class="filter"><option>全部类型</option><option>寻物</option><option>招领</option></select><button class="primary" id="homeSearchBtn">搜索</button></div>
+        <div class="stats"><div class="stat"><div class="label">本周新增信息</div><div class="num">28</div><div class="hint">较上周 +12%</div></div><div class="stat"><div class="label">已成功归还</div><div class="num">16</div><div class="hint">感谢每一位热心同学</div></div><div class="stat"><div class="label">待处理信息</div><div class="num">42</div><div class="hint" style="color:#a96a00">建议优先查看最新发布</div></div></div>
+        <div class="section-head"><h2>最新信息</h2><span>按发布时间排序</span></div>
+        <div class="grid" id="latestGrid"></div>
+        <div class="flow-note"><b>推荐使用路径</b><br>浏览或搜索信息 → 查看物品详情 → 联系发布者；需要帮助他人时，进入“发布信息”填写物品信息并点击发布。</div>
+      </section>
+
+      <section id="publish" class="view">
+        <div class="hero"><div><h1>发布信息</h1><p>请尽量填写完整，方便失主或拾主快速确认。</p></div></div>
+        <div class="card form-card"><div class="notice">原型演示：发布后信息会出现在首页和“我的发布”，默认状态为“待认领”。</div><div class="form-grid">
+          <div class="field"><label for="type">信息类型</label><select id="type"><option>寻物</option><option>招领</option></select></div>
+          <div class="field"><label for="category">物品类别</label><select id="category"><option>校园卡</option><option>钥匙</option><option>电子设备</option><option>书籍</option><option>其他</option></select></div>
+          <div class="field"><label for="title">物品名称</label><input id="title" placeholder="例如：蓝色校园卡套" /></div>
+          <div class="field"><label for="place">发现/遗失地点</label><input id="place" placeholder="例如：图书馆二楼自习区" /></div>
+          <div class="field full"><label for="time">发生时间</label><input id="time" type="datetime-local" value="2026-09-28T15:30" /></div>
+          <div class="field full"><label for="desc">详细描述</label><textarea id="desc" placeholder="填写颜色、特征、联系方式说明等关键信息"></textarea></div>
+          <div class="field full"><label>物品图片（可选）</label><div class="upload">＋ 点击上传图片（原型演示占位）</div></div>
+        </div><div class="form-actions"><button class="ghost" data-view="home">取消</button><button class="primary" id="publishBtn">发布信息</button></div></div>
+      </section>
+
+      <section id="search" class="view"><div class="hero"><div><h1>搜索物品</h1><p>按关键词查找校园内的寻物与招领信息。</p></div></div><div class="searchbar"><input id="searchInput" placeholder="输入物品名称、地点或关键词" /><select class="filter" id="searchType"><option>全部类型</option><option>寻物</option><option>招领</option></select><button class="primary" id="searchBtn">搜索</button></div><div class="section-head"><h2 id="resultTitle">全部信息</h2><span>共 6 条演示数据</span></div><div class="grid" id="resultGrid"></div></section>
+
+      <section id="detail" class="view"><div class="hero"><div><h1>信息详情</h1><p>核对物品特征后，再联系发布者。</p></div><button class="secondary" data-view="search">返回搜索</button></div><div class="detail"><div class="detail-photo" id="detailEmoji">🎒</div><div class="card detail-card"><span class="tag blue" id="detailTag">寻物</span><h2 id="detailTitle">黑色双肩包</h2><p class="meta" id="detailSub">发布于 2026-09-28 14:20</p><dl><dt>类别</dt><dd id="detailCategory">生活用品</dd><dt>地点</dt><dd id="detailPlace">南区食堂门口</dd><dt>时间</dt><dd id="detailTime">2026-09-28 13:50</dd><dt>描述</dt><dd id="detailDesc">黑色双肩包，侧袋有白色贴纸，内有一本《构建之法》。</dd></dl><button class="primary" id="contactBtn">联系发布者</button><div class="contact" id="contactBox" style="display:none"><div class="name">发布者：李同学</div><div class="small">联系方式仅用于本次物品确认，请注意保护个人隐私。</div><div style="margin-top:8px;color:var(--brand);font-weight:700">站内留言：点击后可在正式产品中发送消息</div></div></div></div></section>
+
+      <section id="mine" class="view"><div class="hero"><div><h1>我的发布</h1><p>查看并修改自己发布的信息状态。</p></div><button class="primary" data-view="publish">＋ 新建发布</button></div><div class="grid" id="mineGrid"></div></section>
+      <section id="help" class="view"><div class="hero"><div><h1>使用帮助</h1><p>三步完成一次寻物或招领。</p></div></div><div class="card form-card"><div class="section-head"><h2>查看信息 → 查看详情</h2></div><p class="meta">首页浏览最新信息，或在搜索页输入物品名称、地点和关键词；点击信息卡片进入详情页，确认物品特征后联系发布者。</p><div class="section-head"><h2>发布信息 → 发布成功</h2></div><p class="meta">进入发布页面 → 选择寻物/招领 → 填写名称、地点、时间和描述 → 点击“发布信息”。</p><div class="section-head"><h2>搜索物品 → 查看搜索结果</h2></div><p class="meta">输入关键词并选择信息类型，点击搜索；结果卡片支持继续查看详情。</p><div class="notice" style="margin-top:20px">本原型没有实现后台管理、实名认证、实时聊天和地图定位，这些属于后续开发范围。</div></div></section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const items=[
+      {id:1,type:'寻物',category:'生活用品',title:'黑色双肩包',place:'南区食堂门口',time:'2026-09-28 13:50',desc:'黑色双肩包，侧袋有白色贴纸，内有一本《构建之法》。',emoji:'🎒',tag:'blue'},
+      {id:2,type:'招领',category:'校园卡',title:'校园卡一张',place:'图书馆二楼自习区',time:'2026-09-28 12:30',desc:'在靠窗座位发现一张校园卡，已妥善保管。',emoji:'💳',tag:''},
+      {id:3,type:'寻物',category:'电子设备',title:'白色无线耳机',place:'体育馆西门',time:'2026-09-27 18:20',desc:'白色充电盒，盒面有一条浅蓝色划痕。',emoji:'🎧',tag:'blue'},
+      {id:4,type:'招领',category:'书籍',title:'《高等数学》教材',place:'教学楼 A302',time:'2026-09-27 16:10',desc:'书内夹有一张打印的课程表，请失主核对。',emoji:'📘',tag:''},
+      {id:5,type:'寻物',category:'钥匙',title:'宿舍钥匙串',place:'东区快递点',time:'2026-09-27 11:40',desc:'三把钥匙和一个橙色小挂件，急寻归还。',emoji:'🔑',tag:'blue'},
+      {id:6,type:'招领',category:'其他',title:'透明雨伞',place:'实验楼一层门厅',time:'2026-09-26 09:05',desc:'透明长柄雨伞，伞柄缠有绿色胶带。',emoji:'☂️',tag:''}
+    ];
+    let mine=[{...items[0],status:'待处理'},{...items[2],status:'待处理'}];
+    const labels={home:'首页',publish:'发布信息',search:'搜索物品',detail:'信息详情',mine:'我的发布',help:'使用帮助'};
+    const el=id=>document.getElementById(id);
+    function card(item, mineMode=false){return `<article class="card item"><div class="item-photo">${item.emoji}</div><div class="item-body"><div class="row"><div class="item-title">${item.title}</div><button class="ghost" aria-label="查看详情" onclick="openDetail(${item.id})">查看</button></div><div class="meta">${item.place} · ${item.time.slice(5,16)}</div><span class="tag ${item.tag}">${item.type}</span>${mineMode?`<span class="tag warm" style="margin-left:5px">${item.status}</span>`:''}</div></article>`}
+    function render(){el('latestGrid').innerHTML=items.slice(0,3).map(card).join('');el('resultGrid').innerHTML=items.map(card).join('');el('mineGrid').innerHTML=mine.map(x=>card(x,true)).join('')}
+    function show(view){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===view));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));el('crumbText').textContent=labels[view]||'首页';window.scrollTo({top:0,behavior:'smooth'})}
+    document.addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(b)show(b.dataset.view)});
+    function openDetail(id){const x=items.find(i=>i.id===id)||items[0];el('detailEmoji').textContent=x.emoji;el('detailTag').textContent=x.type;el('detailTag').className='tag '+(x.tag||'');el('detailTitle').textContent=x.title;el('detailSub').textContent='发布于 '+x.time;el('detailCategory').textContent=x.category;el('detailPlace').textContent=x.place;el('detailTime').textContent=x.time;el('detailDesc').textContent=x.desc;el('contactBox').style.display='none';show('detail')}
+    function doSearch(){const q=(el('searchInput').value||el('homeSearch').value).trim().toLowerCase();const type=el('searchType').value;const data=items.filter(x=>(!q||[x.title,x.place,x.category,x.desc].join('').toLowerCase().includes(q))&&(type==='全部类型'||x.type===type));el('resultTitle').textContent=q?`“${q}”的搜索结果`:'全部信息';el('resultGrid').innerHTML=data.length?data.map(card).join(''):`<div class="empty" style="grid-column:1/-1"><div class="big">⌕</div>暂未找到匹配信息，请换个关键词试试。</div>`;show('search')}
+    el('homeSearchBtn').onclick=doSearch;el('searchBtn').onclick=doSearch;el('contactBtn').onclick=()=>{el('contactBox').style.display='block';toast('已展示联系方式（原型演示）')};
+    el('publishBtn').onclick=()=>{const title=el('title').value.trim()||'未命名物品';const x={id:99,type:el('type').value,category:el('category').value,title,place:el('place').value.trim()||'未填写地点',time:'2026-09-28 15:30',desc:el('desc').value.trim()||'暂无详细描述',emoji:'📦',tag:el('type').value==='寻物'?'blue':'',status:'待处理'};items.unshift(x);mine.unshift(x);render();toast('发布成功，已进入“我的发布”');show('mine')};
+    function toast(t){const x=el('toast');x.textContent=t;x.classList.remove('show');void x.offsetWidth;x.classList.add('show')}
+    render();
+  </script>
+</body>
+</html>
