@@ -18,7 +18,8 @@ const cases = [
   ['validation rejects missing required fields', () => assert.equal(D.validateItem({ type: '寻物' }).valid, false)],
   ['validation accepts complete input', () => assert.equal(D.validateItem(base).valid, true)],
   ['createItem applies defaults and owner', () => { const item = D.createItem({ title: '钥匙', place: '门口', time: base.time, description: '三把钥匙', owner: 'tan' }, 9, 'now'); assert.equal(item.id, 9); assert.equal(item.owner, 'tan'); assert.equal(item.status, '待处理'); }],
-  ['updateStatus changes only target item', () => { const changed = D.updateStatus(items, 1, '已找到'); assert.equal(changed[0].status, '已找到'); assert.equal(changed[1].status, '已找到'); assert.equal(changed[2].status, '已归还'); }],
+  ['updateStatus changes only target item and preserves input', () => { const changed = D.updateStatus(items, 1, '已找到'); assert.equal(changed[0].status, '已找到'); assert.equal(changed[1].status, '已找到'); assert.equal(changed[2].status, '已归还'); assert.equal(items[0].status, '待处理'); }],
+  ['updateStatus rejects unknown status without changing records', () => { const changed = D.updateStatus(items, 1, '未知状态'); assert.deepEqual(changed, items); assert.notEqual(changed, items); }],
   ['updateItem changes editable fields', () => assert.equal(D.updateItem(items, 1, { title: '更新后的卡' })[0].title, '更新后的卡')],
   ['formatTime removes seconds and T', () => assert.equal(D.formatTime('2026-10-09T10:20:30'), '2026-10-09 10:20')],
   ['summary counts pending and returned', () => assert.deepEqual(D.summarize(items), { total: 3, pending: 1, completed: 1 })]
@@ -26,8 +27,8 @@ const cases = [
 
 let passed = 0;
 for (const [name, run] of cases) {
-  try { run(); passed += 1; console.log(`✓ ${name}`); }
-  catch (error) { console.error(`✗ ${name}\n  ${error.message}`); process.exitCode = 1; }
+  try { run(); passed += 1; console.log('✓ ' + name); }
+  catch (error) { console.error('✗ ' + name + ' -> ' + error.message); process.exitCode = 1; }
 }
-console.log(`\n${passed}/${cases.length} tests passed`);
+console.log(passed + '/' + cases.length + ' tests passed');
 if (passed !== cases.length) process.exitCode = 1;
