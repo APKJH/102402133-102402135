@@ -6,8 +6,8 @@
 - 作业：2026 秋软件工程第二次结对作业——程序实现
 - 结对成员：谭段昊（102402133）、王伟浩（102402135）
 - 实现形式：HTML + CSS + JavaScript 响应式 Web 程序
-- 在线演示：<https://shiyue999.github.io/campus-lost-found-mini-program/>
-- GitHub 仓库：<https://github.com/Shiyue999/campus-lost-found-mini-program>
+- 在线演示：<https://shiyue999.github.io/102402133-102402135/>
+- GitHub 仓库：<https://github.com/Shiyue999/102402133-102402135>
 
 ## 功能范围
 
@@ -33,7 +33,7 @@ campus-lost-found/
 │  ├─ data.js                 # 演示种子数据
 │  ├─ domain.js               # 可独立测试的业务规则纯函数
 │  └─ styles.css              # 响应式页面样式
-├─ tests/domain.test.js       # 13 个单元测试
+├─ tests/domain.test.js       # 14 个单元测试
 ├─ docs/
 │  ├─ flowchart.mmd           # 关键流程图
 │  ├─ data-model.md           # 数据结构与模块说明
@@ -65,7 +65,7 @@ npx serve .
 npm test
 ```
 
-当前测试覆盖关键词搜索、类型筛选、状态筛选、无结果、表单校验、新建、修改、状态更新、时间格式化和统计等 13 个场景，结果为 **13/13 通过**。详细说明见 [`docs/test-report.md`](docs/test-report.md)。
+当前测试覆盖关键词搜索、类型筛选、状态筛选、无结果、表单校验、新建、修改、状态更新、非法状态拒绝、时间格式化和统计等 14 个场景，结果为 **14/14 通过**。详细说明见 [`docs/test-report.md`](docs/test-report.md)。
 
 ## 结对分工
 
